@@ -29,6 +29,27 @@ function App() {
 
     setMovies(results);
     setMovie(results[0]);
+
+    if (results.lenght) {
+      await fetchMovie(results[0].id);
+    }
+  };
+
+  // Individual movie fetch function
+  const fetchMovie = async (id) => {
+    const { data } = await axios.get(`${API_URL}/movie/${id}`, {
+      params: {
+        api_key: API_KEY,
+        append_to_response: "videos",
+      },
+    });
+    if (data.videos & data.videos.results) {
+      const trailer = data.videos.results.find(
+        (vid) => vid.name === "Official Trailer"
+      );
+      setTrailer(trailer ? trailer : data.videos.results[0]);
+    }
+    setMovie(data);
   };
 
   //Search Movies function
