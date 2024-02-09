@@ -52,6 +52,13 @@ function App() {
     setMovie(data);
   };
 
+  // Select Movie function
+  const selectMovie = async (movie) => {
+    fetchMovie(movie.id);
+    setMovie(movie);
+    window.scrollTo(0, 0);
+  };
+
   //Search Movies function
   const searchMovies = (e) => {
     e.preventDefault();
