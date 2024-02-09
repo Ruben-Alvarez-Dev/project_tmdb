@@ -31,6 +31,12 @@ function App() {
     setMovie(results[0]);
   };
 
+  //Search Movies function
+  const searchMovies = (e) => {
+    e.preventDefault();
+    fetchMovies(searchKey);
+  };
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -38,6 +44,15 @@ function App() {
   return (
     <div className="app">
       <h2>Movie App</h2>
+      {/* Search */}
+      <form className="search">
+        <input
+          type="text"
+          value={searchKey}
+          onChange={(e) => setSearchKey(e.target.value)}
+        />
+        <button onClick={searchMovies}>Search</button>
+      </form>
       {/* Container */}
       <div className="container">
         <div className="display">
